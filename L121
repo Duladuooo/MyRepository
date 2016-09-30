@@ -1,0 +1,36 @@
+public class Solution {
+	public int maxProfit(int[] prices) {
+		if (prices.length ==0) return 0;
+		int next = 0;
+		int max = 0;
+		boolean hasNext = true;
+		while(hasNext && next < prices.length){
+			hasNext = false;
+			int buy = prices[next];
+			int sell = 0;
+			boolean hasell = false;
+			for (int i=next+1; i<prices.length;i++){
+				if (!hasell){
+					if(prices[i] <= buy)
+						buy = prices[i];
+					else {
+						hasell = true;
+						sell = prices[i];
+					}
+				}
+				else{
+					if(prices[i] >= sell)
+						sell = prices[i];
+					else if(prices[i] >= buy)
+						;
+					else if(!hasNext){
+						next = i;
+						hasNext = true;
+					}
+				}
+			}
+			if(hasell) max = ((sell-buy)>max) ? sell-buy : max;
+		}
+		return max;
+	}
+}
