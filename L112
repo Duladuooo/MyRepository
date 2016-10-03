@@ -1,0 +1,29 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    int flag = 0;
+    public boolean hasPathSum(TreeNode root, int sum) {
+        flag = 0;
+        hasPath(root,sum);
+        return (flag==0) ? false : true;
+    }
+    public void hasPath(TreeNode root,int sum){
+        if(root == null) return;
+        else if((root.val == sum) && root.left==null && root.right==null) {
+            flag++;
+            return;
+        }
+        else{
+            hasPath(root.left, sum-root.val);
+            hasPath(root.right, sum-root.val);
+        } 
+    }
+    
+}
