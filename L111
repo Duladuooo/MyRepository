@@ -1,0 +1,40 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+import java.util.LinkedList;
+import java.util.Queue;
+public class Solution {
+	public int minDepth(TreeNode root) {
+		if(root == null) return 0;
+		int count = 0;
+		int nextCount = 1;
+		int depth = 0;
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+		queue.add(root);
+		while(!queue.isEmpty()){
+			TreeNode top = queue.poll();
+			if(count == 0){
+				count = nextCount;
+				nextCount = 0;
+				depth ++;
+			}
+			count --;
+			if(top.left != null ){
+				nextCount++;
+				queue.add(top.left);
+			}
+			if(top.right != null){
+				nextCount++;
+				queue.add(top.right);
+			}
+			else if(top.left == null && top.right == null) return depth;
+		}
+		return depth;
+	}
+}
