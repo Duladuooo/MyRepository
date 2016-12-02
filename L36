@@ -1,0 +1,52 @@
+public class Solution {
+	public boolean isValidSudoku(char[][] board) {
+		
+		//row
+		for(int i=0; i<9;i++){
+			int[] num = new int[9];
+			
+			for(int j=0;j<9;j++){
+				if(board[i][j] == '.') ;
+				else if(board[i][j] >= '1' && board[i][j] <= '9'){
+					int bit = board[i][j]-'1';
+					if(num[bit] == 1) return false;
+					else num[bit]=1;
+				}
+				else return false;
+			}
+		}
+		
+		//column
+		for(int i=0; i<9;i++){
+			int[] num = new int[9];
+			for(int j=0;j<9;j++){
+				if(board[j][i] == '.') ;
+				else if(board[j][i] >= '1' && board[j][i] <= '9'){
+					int bit = board[j][i]-'1';
+					if(num[bit] == 1) return false;
+					else num[bit]=1;
+				}
+				else return false;
+			}
+		}
+		
+		//cell
+		for(int m=0;m<9;m+=3){
+			for(int n=0; n<9;n+=3){
+				int[] num = new int[9];
+				for(int i= m;i<m+3;i++){
+					for(int j=n;j<n+3;j++){
+						if(board[i][j] == '.') ;
+						else if(board[i][j] >= '1' && board[i][j] <= '9'){
+							int bit = board[i][j]-'1';
+							if(num[bit] == 1) return false;
+							else num[bit]=1;
+						}
+						else return false;
+					}
+				}
+			}
+		}
+		return true;
+	}
+}
