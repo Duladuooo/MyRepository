@@ -1,0 +1,24 @@
+import java.util.Hashtable;
+
+public class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int start = 0;
+        int end = 0;
+        Hashtable<Character,Integer> ht = new Hashtable<Character,Integer>();
+        int longest = 0;
+        while(end < s.length()){
+        	char c = s.charAt(end);
+        	if(ht.containsKey(c)) {
+        		int index = ht.get(c);
+        		if(index >= start){
+        			longest = (end-start > longest) ? end-start : longest;
+        			start = index + 1;
+        		}
+        	}
+        	ht.put(c, end);
+        	end++;
+        }
+        longest = (end-start > longest) ? end-start : longest;
+        return (longest==0) ? ht.size() : longest;
+    }
+}
