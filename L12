@@ -1,0 +1,34 @@
+public class Solution {
+	int[] n = {1,4,5,9,10,40,50,90,100,400,500,900,1000};
+    public String intToRoman(int num) {
+    	String result = "";
+        int t = 10;
+        String[] st = {"I","IV","V","IX","X","XL","L","XC","C","CD","D","CM","M"};
+        while(num % t != 0 || num>0){
+        	int rest = num%t;
+        	if(rest == 0){
+        		t = t*10;
+        		continue;
+        	}
+        	
+        	num = num-rest;
+        	int index = index(rest);
+        	int i = index(t/10);
+        	String temp = st[index];
+        	rest = rest-n[index];
+        	while(rest > 0){
+        		temp += st[i];
+        		rest -= n[i];
+        	}
+        	result = temp+result;
+        	t = t*10;
+        }
+        return result;
+    }
+    int index(int num){
+    	for(int i=0; i<n.length;i++){
+    		if(num < n[i]) return i-1;
+    	}
+    	return n.length-1;
+    }
+}
