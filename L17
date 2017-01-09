@@ -1,0 +1,30 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+    public List<String> letterCombinations(String digits) {
+        List<String> result = new ArrayList<String>();
+        String[] phone = {"abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        if(digits.indexOf('0')!= -1 || digits.indexOf('1') != -1) return result;
+        for(int i=digits.length()-1;i>=0;i--){
+        	int index = Integer.valueOf(digits.charAt(i)+"") - 2;
+        	if(result.size()==0) {
+        		for(int j=0;j<phone[index].length();j++){
+        			result.add(phone[index].charAt(j)+"");
+        		}
+        	}
+        	else{
+        		int size = result.size();
+        		for(int m=0;m<size;m++){
+        			for(int n=1;n<phone[index].length();n++){
+        				String s = phone[index].charAt(n)+result.get(m);
+        				result.add(s);
+        			}
+        			String s = phone[index].charAt(0)+result.get(m);
+        			result.set(m, s);
+        		}
+        	}
+        }
+        return result;
+    }
+}
