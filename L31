@@ -1,0 +1,36 @@
+public class Solution {
+    public void nextPermutation(int[] nums) {
+        if (nums.length < 2) return;
+        int i,k;
+    	for(i = nums.length - 2; i >=0 ;i--){
+        	if(nums[i] < nums[i+1])
+        		break;
+        }
+    	
+    	if(i < 0) {
+    		reverse(nums, 0, nums.length-1);
+    		return;
+    	}
+    	
+    	for(k = nums.length-1; k > i; k--){
+    		if(nums[k] > nums[i])
+    			break;
+    	}
+    	
+    	int t = nums[i];
+    	nums[i] = nums[k];
+    	nums[k] = t;
+    	reverse(nums, i+1, nums.length-1);
+    	
+    }
+    
+    public void reverse(int[] nums, int start, int end){
+    	while(start < end){
+    		int t = nums[start];
+    		nums[start] = nums[end];
+    		nums[end] = t;
+    		start++;
+    		end--;
+    	}
+    }
+}
