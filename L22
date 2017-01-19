@@ -1,0 +1,37 @@
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+public class Solution {
+	private static List<Set<String>> list = new ArrayList<Set<String>>();
+    public List<String> generateParenthesis(int n) {
+    	if(list.size() == 0) list.add(new HashSet<String>(){{add("");}});
+    	int size = list.size();
+        while(size < n+1){
+        	Set<String> current = new HashSet<String>();
+        	for(String s : list.get(size-1)){
+        		current.add("("+s+")");
+        		current.add("()"+s);
+        		current.add(s+"()");
+        	}
+        	for(int m=2; m<=size/2;m++){
+        		Set<String> set1 = list.get(m);
+        		Set<String> set2 = list.get(size-m);
+        		for(String s1 : set1){
+        			for(String s2 : set2){
+        				current.add(s1+s2);
+        				current.add(s2+s1);
+        			}
+        		}
+        	}
+        	list.add(current);
+        	size++;
+        }
+        List<String> result = new ArrayList<String>();
+        for(String s : list.get(n)){
+        	result.add(s);
+        }
+        return result;
+    }
+}
